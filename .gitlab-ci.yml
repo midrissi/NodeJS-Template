@@ -2,15 +2,13 @@ stages:
   - build
   - test
 
-before_script:
-  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-
 Build the Docker Image:
   variables:
     DOCKER_HOST: 'unix:///var/run/docker.sock'
   image: docker:dind
   stage: build
   script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - dockerd-entrypoint.sh &
     - sleep 3
     - docker pull ${CI_REGISTRY_IMAGE}:latest > /dev/null 2>&1
