@@ -21,6 +21,4 @@ Test the service:
     - name: ${CI_REGISTRY_IMAGE}:latest
       alias: server
   script:
-    - apt-get update -yq
-    - apt-get install -yq curl
     - curl -sSL http://server:3000/ok
