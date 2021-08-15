@@ -1,0 +1,8 @@
+.env
+.vscode
+db
+logs
+.eslintignore
+.eslintrc.js
+.gitignore
+.prettierrc.json
