@@ -1,5 +1,6 @@
 stages:
   - build
+  - test
 
 before_script:
   - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
@@ -15,3 +16,13 @@ Build the Docker Image:
     - docker pull ${CI_REGISTRY_IMAGE}:latest > /dev/null 2>&1
     - docker build --cache-from ${CI_REGISTRY_IMAGE}:latest --tag ${CI_REGISTRY_IMAGE}:latest .
     - docker push ${CI_REGISTRY_IMAGE}:latest
+
+Test the service:
+  stage: test
+  services:
+    - name: ${CI_REGISTRY_IMAGE}:latest
+      alias: server
+  script:
+    - apt-get update -yq
+    - apt-get install -yq curl
+    - curl -sSL http://server:3000/ok
