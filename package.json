@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --inspect .",
+    "start": "node .",
+    "start:dev": "nodemon --inspect .",
     "lint": "eslint ."
   },
   "keywords": [],
