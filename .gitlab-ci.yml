@@ -1,0 +1,12 @@
+stages:
+  - build
+
+before_script:
+  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+
+Build the Docker Image:
+  stage: build
+  script:
+  - docker pull ${CI_REGISTRY_IMAGE}:latest
+  - docker build --cache-from ${CI_REGISTRY_IMAGE}:latest --tag ${CI_REGISTRY_IMAGE}:latest .
+  - docker push ${CI_REGISTRY_IMAGE}:latest
